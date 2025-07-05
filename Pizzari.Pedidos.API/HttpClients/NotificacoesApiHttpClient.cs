@@ -5,7 +5,7 @@ namespace Pizzaria.Pedidos.API.HttpClients
     public class NoticacoesApiHttpClient
     {
 
-        public sealed class Clients(HttpClient httpClient)
+        public sealed class Clients(HttpClient httpClient )
         {
             public async Task CriarNotificacaoAsync(string pedidoId, string destinatario, string mensagem)
             {
