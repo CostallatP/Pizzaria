@@ -1,0 +1,21 @@
+@host = http://localhost:5195
+
+### Cadastrar Pizza
+POST {{host}}/Sabor
+Content-Type: application/json
+{
+    "sabor":"Calabresa",
+    "tempoPreparo": 10,
+    "preco":10.5
+
+}
+
+### Cadastrar Estoque
+POST {{host}}/Estoque
+Content-Type: application/json
+{
+    "PizzaId": 2,
+    "Quantidade":100
+}
+### Reduzie estoque 
+PUT {{host}}/estoque/pizza/2/5

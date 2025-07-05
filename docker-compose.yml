@@ -1,0 +1,61 @@
+services:
+  consul:
+       image: hashicorp/consul:latest
+       container_name: "consul"
+       ports:
+        - "5001:8500"
+  pizzariapizzaapi:
+    # image: ${DOCKER_REGISTRY-}pizzariapizzaapi
+    build:
+      context: .
+      dockerfile: Pizza.API/Dockerfile
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+     - "4003:8080"
+
+  pizzarianotificacoesapi:
+    image: brunoosilva/ms-notificacoesservice
+    # build:
+    #   context: .
+    #   dockerfile: ./NotificacoesAPI/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - Consul__Discovery__Hostname=pizzarianotificacoesapi
+    ports:
+      - "4001:8080"
+
+
+
+  pizzariapedidosapi:
+    # image: ${DOCKER_REGISTRY-}pizzariapedidosapi
+    build:
+      context: .
+      dockerfile: Pizzari.Pedidos.API/Dockerfile
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+     - "4002:8080"
+
+  pizzariagatewayapi:
+    # image: ${DOCKER_REGISTRY-}pizzariagatewayapi
+    build:
+      context: ../Pizzaria.Gateway.API
+      dockerfile: Dockerfile
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - ASPNETCORE_HTTP_PORTS=8080
+    ports: 
+      - "3001:8080"
+
+  fake-smtp-server:
+    image: gessnerfl/fake-smtp-server:latest
+    container_name: "fake-smtp-server"
+    restart: always
+    ports:
+      # - 8025:8025      #expose smtp port
+      - 7001:8080      #expose web ui
+      - 7002:8081      #expose management api

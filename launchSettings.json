@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "pizzaria.pizza.api": "StartDebugging",
+        "pizzaria.pedidos.api": "StartDebugging",
+        "pizzaria.gateway.api": "StartDebugging"
+      }
+    }
+  }
+}

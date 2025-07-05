@@ -1,0 +1,6 @@
+@Pizzaria.Notificacoes.API_HostAddress = http://localhost:5064
+
+GET {{Pizzaria.Notificacoes.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
